@@ -1,1 +1,6 @@
 .DS_Store
+local_settings.yml
+dist/
+.Rhistory
+.RData
+.Rproj.user/
