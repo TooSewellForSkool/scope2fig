@@ -40,7 +40,7 @@ build_release <- function(root = getwd()) {
   unlink(stage, recursive = TRUE); dir.create(dest, recursive = TRUE)
 
   files <- list.files(root, recursive = TRUE, all.files = TRUE, no.. = TRUE)
-  skip <- "^(dist|tools|\\.git|\\.github|\\.Rproj\\.user)(/|$)|(^|/)(local_settings\\.yml|\\.DS_Store|\\.Rhistory|\\.RData|\\.gitignore)$"
+  skip <- "^(dist|tools|\\.git|\\.github|\\.Rproj\\.user)(/|$)|(^|/)(local_settings\\.yml|\\.DS_Store|\\.Rhistory|\\.RData|\\.gitignore|\\.gitattributes)$|\\.zip$"
   files <- files[!grepl(skip, files)]
   for (f in files) {
     dir.create(dirname(file.path(dest, f)), recursive = TRUE, showWarnings = FALSE)

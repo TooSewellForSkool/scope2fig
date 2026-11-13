@@ -28,6 +28,7 @@ so images you compare are displayed the same way. Your original files are never 
 
 ---
 
+Licensed under the GNU GPL v3 (see [`LICENSE`](LICENSE)).
 Author: Jonathon Sewell, developed with Claude (Anthropic). Version: `VERSION`; history:
 [`CHANGELOG.md`](CHANGELOG.md); background and design: [`DEVELOPMENT.md`](DEVELOPMENT.md).
 
