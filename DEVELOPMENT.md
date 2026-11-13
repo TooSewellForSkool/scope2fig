@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Name** | scope2fig (formerly "confocal_pipeline"; renamed 2026-11-06 once it read any microscope format) |
-| **Repository** | https://github.com/TooSewell4Skool/scope2fig |
+| **Repository** | https://github.com/TooSewellForSkool/scope2fig |
 | **Version** | see `VERSION` (history in `CHANGELOG.md`) |
 | **Author** | Jonathon Sewell - design, original Fiji macros and R scripts, testing on real data |
 | **Code** | Written with Claude (Anthropic) in working sessions with the author |

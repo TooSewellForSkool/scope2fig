@@ -10,7 +10,7 @@ All dates 2026. Author: Jonathon Sewell, developed with Claude (Anthropic).
 - README rewritten as a landing page (what you get, "Start here" by experience level).
 - User guides are Markdown in the repository; `tools/build_release.R` builds the release zip with
   plain-text copies (`.txt`) and the Mac launcher kept executable.
-- GitHub bug-report template asking for the error report; GitHub links use TooSewell4Skool.
+- GitHub bug-report template asking for the error report; GitHub links point to github.com/TooSewellForSkool/scope2fig; `support.yml` shows the issues link with every error report.
 
 ## 1.3.0 - 2026-11-06
 - Renamed from "confocal_pipeline" to **scope2fig** (it reads any microscope format).

@@ -21,7 +21,7 @@ so images you compare are displayed the same way. Your original files are never 
 | have never used Terminal or R | **[Guide for the uninitiated](GUIDE_FOR_THE_UNINITIATED.md)** - step by step, with copy-paste commands |
 | are comfortable installing software | **[Getting started](GETTING_STARTED.md)** - the short version |
 | use R and want scripts / automation | [For R users](#running) below |
-| hit a problem | see [error reports](#when-something-goes-wrong-error-reports), or open an [issue](https://github.com/TooSewell4Skool/scope2fig/issues) |
+| hit a problem | see [error reports](#when-something-goes-wrong-error-reports), or open an [issue](https://github.com/TooSewellForSkool/scope2fig/issues) |
 
 **Download:** the latest zip under **Releases** (right side of this page), or **Code > Download ZIP**.
 **Needs:** R (free) and Fiji (free). The launcher installs everything else on first run.
