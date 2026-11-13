@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Windows launcher must keep Windows line endings (also in GitHub "Download ZIP")
+*.bat text eol=crlf
+# Mac launcher must keep Unix line endings
+*.command text eol=lf
+*.sh text eol=lf
