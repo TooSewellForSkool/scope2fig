@@ -1,0 +1,6 @@
+# Who users should contact when the pipeline stops with an error. Shown on screen together
+# with the location of the error report (logs/error_report_<time>.txt). Edit freely.
+contact_name: 'Jonathon'
+contact_email: ''            # e.g. 'name@university.edu'
+issues_url: ''               # once the repository exists: 'https://github.com/TooSewell4Skool/scope2fig/issues'
+message: 'He will try his best to (have Claude) fix it.'

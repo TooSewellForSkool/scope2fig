@@ -1,0 +1,99 @@
+# =============================================================================
+#  scope2fig settings  (one config file per imaging session)
+#  Usually created for you by run_session.R (copy of run_session_TEMPLATE.R).
+#  Single quotes '...' = take the text literally (best for paths and regex).
+# =============================================================================
+
+# Imaging session label (one .lif = one session). Blank = the .lif / folder name.
+# Hierarchy: session > experiment (staining panel; set in the review app) > group
+session_name: ''
+
+input:
+  # .lif vs LAS X export: set path to the .lif file or to an export folder; 'auto' picks the
+  # mode from it. (INPUT in run_session.R overrides this path.)
+  mode: 'auto'               # 'auto' | 'lif' | 'tif_folder'
+  path: '/path/to/Project.lif'
+  # How .lif pixels are read: 'direct' = the pipeline's own reader (finds each image's data
+  # by its ID; fixes the Bio-Formats shifted/next-image problem) | 'bioformats'
+  lif_reader: 'direct'
+
+# true = never open the apps (same as INTERACTIVE <- FALSE in run_session.R)
+unattended: false
+
+# B&C for groups that have no saved settings when the apps are off:
+bc:
+  fallback: 'auto'           # 'auto' (0 to typical 99.9th percentile) | 'template' | 'skip'
+  template: ''               # for 'template': a settings .json, or another session's settings/
+                             # folder (matched by group name, e.g. single_plane_10x_2048x2048)
+
+# Where results go. Blank = a NEW folder next to the input: <name>_pipeline/
+# (TIF-export runs: <name>_tifexport_pipeline/)
+# Raw data is never modified or written into.
+output_root: ''
+
+fiji:
+  path: ''                   # blank = auto-detect (e.g. /Applications/Fiji.app)
+  memory: ''                 # e.g. '8g' for large tile scans; blank = Fiji default
+  extra_args: []
+
+inventory:
+  # Lasers, detectors, zoom and objective come from Leica's own XML (in the .lif,
+  # or the MetaData/ folder of a TIF export). true = also dump Bio-Formats' flattened
+  # metadata to raw_inventory/ for troubleshooting (large file).
+  dump_original_metadata: false
+  processed_name_regex: '(?i)(lng|lightning|thunder|lvcc|deconv)'
+  tile_name_regex: '(?i)(tilescan|mosaic|merged|stitch)'
+
+grouping:
+  # Images are "comparable" when ALL of these match. Edit to loosen/tighten.
+  key_fields: [acq_type, objective_mag, objective_na, size_x, size_y, pixel_size_um, size_c]
+  pixel_size_sig_digits: 3
+  # Laser % differences up to this many percentage points count as the same setting
+  # (LAS X stores e.g. 10% as 10.2%).
+  laser_tolerance_pct: 0.5
+
+naming:
+  # Names matching this are LAS X defaults (= you did not rename at the scope)
+  default_name_regex: '^(Series|Image|Region|Position|TileScan|Mark_and_Find)[ _]?\d+$'
+  # Pre-fill your fields from image/file names when the information is there (never required).
+  # Built-in patterns recognise e.g. "(+)BAF" / "+BAF", WT/KO/cKO/Ctrl/Vehicle..., DIV7/DPI3
+  # (-> experimental_id, combined like "(+)BAF DIV1"), mouse3/rep2 (-> animal_replicate),
+  # SLIDE3-2/coverslip1/well4 (-> section_coverslip), FoV2/pos3 and Zen's "20X-02-" (-> fov).
+  # Pre-filled values are yellow in the review app for you to confirm.
+  parse_names: true          # false = never pre-fill from names
+  # To replace the patterns for a field, list your own (regular expressions with a group
+  # named "value"; every matching pattern adds its value), e.g.:
+  # name_patterns:
+  #   experimental_id: ['(?i)(?<value>BAF|NGF)', '(?<value>DIV\d+)']
+  #   timepoint: ['(?i)(?<value>DIV\d+)']     # needs "timepoint" in user_fields below
+  # Optional: one regex with named groups per field, applied last, e.g.
+  #   '^(?<experimental_id>[^_]+)_'   ->  "KO_63x_cell1" gives experimental_id = KO
+  name_fields_regex: ''
+
+previews:
+  max_size: 512              # longest side of B&C previews (px)
+  large_max_size: 1536       # ...for images bigger than large_threshold_px (stitched tile scans)
+  large_threshold_px: 3000
+
+render:
+  channel_png: 'gray'        # per-channel PNGs: 'gray' or 'color'
+  save_stack: false          # true = also save each full z-stack as a .tif (large files)
+
+figures:
+  panel_px: 600              # width of each channel panel in a montage (px)
+  scale_bar_um: 0            # 0 = automatic "nice" length (~1/5 of the field), same within a group
+  scale_bar_label: true      # print e.g. "50 µm" above the bar (set false for publication figures)
+  inset_channel: ''          # e.g. 'DAPI' to inset that channel into the merge's corner
+  caption: false             # add a text strip (name + your fields) under each montage
+  pptx: true                 # build a PowerPoint (needs the 'officer' package)
+  pptx_title_size: 30        # slide title font size (pt)
+  grid_cell_px: 320
+  grid_max_rows: 6           # images per comparison-grid page
+  grid_label_fields: [experimental_id, animal_replicate, section_coverslip, fov]
+  sort_fields: [experimental_id, animal_replicate, section_coverslip, fov]
+
+# Your own per-image columns, filled/confirmed in the review app.
+#   IHC: animal_replicate = animal,     section_coverslip = tissue section, fov = region (e.g. hippocampus)
+#   ICC: animal_replicate = replicate,  section_coverslip = coverslip,      fov = FoV1, FoV2, ...
+# Add more names here any time; existing values are kept.
+user_fields: [experimental_id, animal_replicate, section_coverslip, fov, notes]
